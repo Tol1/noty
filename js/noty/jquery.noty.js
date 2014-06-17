@@ -18,7 +18,20 @@ if(typeof Object.create !== 'function') {
     };
 }
 
-(function($) {
+(function (factory) {
+  if (typeof exports === 'object' && typeof require === 'function') {
+    module.exports = factory(require("jquery"));
+  } else if (typeof define === "function" && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(["jquery"], function($) {
+      // Use global variables if the locals are undefined.
+      return factory($ || window.$);
+    });
+  } else {
+    // RequireJS isn't being used. Assume underscore and backbone are loaded in <script> tags
+    factory($);
+  }
+}(function($) {
 
     var NotyObject = {
 
@@ -486,8 +499,9 @@ if(typeof Object.create !== 'function') {
             layout.container.style.apply($(layout.container.selector));
         });
     });
+    return $.notyRenderer.init;
 
-})(jQuery);
+}));
 
 // Helpers
 window.noty = function noty(options) {

@@ -14,6 +14,7 @@
             "url" : "http://noty.mit-license.org/"
         }
     ],
+    "main": "js/noty/packaged/jquery.noty.packaged.js",
     "scripts"        : {
         "build": "grunt build"
     },
